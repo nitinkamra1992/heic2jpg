@@ -42,14 +42,13 @@ def convert(inp, outp, quality, rec=False, verbose=False):
         if ext.lower() in ['.heic', '.heif']:
             if outp is None:
                 outp = pre + '.jpg'
-            else:
-                assert not os.path.isdir(outp), "Both inp and outp should be files"
-                pre, ext = os.path.splitext(outp)
-                assert ext.lower() in ['.jpg']
-                dirname = os.path.dirname(outp)
-                create_directory(dirname)
+            assert not os.path.isdir(outp), "Both inp and outp should be files"
+            pre, ext = os.path.splitext(outp)
+            assert ext.lower() in ['.jpg']
+            dirname = os.path.dirname(outp)
+            create_directory(dirname)
             vprint(verbose, 'Converting {} into {}'.format(inp, outp))
-            subprocess.call('heif-convert -q {} "{}" "{}"'.format(quality, inp, outp), shell=True)
+            subprocess.call('heif-convert -q {} -f jpg -p "{}" -o "{}" "{}"'.format(quality, dirname, pre[len(dirname)+1:], inp), shell=True)
         else:
             outp = inp if outp is None else outp
             vprint(verbose, 'Copying {} directly to {}'.format(inp, outp))
@@ -84,7 +83,7 @@ if __name__ == '__main__':
 
     # Parse arguments
     parser = argparse.ArgumentParser(description='Convert HEIC image files \
-        to JPG format using libheif (see https://github.com/strukturag/libheif/blob/master/examples/heif_convert.cc).')
+        to JPG format using libheif (see https://github.com/NeverMendel/heif-convert).')
     parser.add_argument('-d', '--data',
                         help='Input file/directory.')
     parser.add_argument('-o', '--out',

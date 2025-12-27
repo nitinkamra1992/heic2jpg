@@ -1,6 +1,10 @@
 # heic2jpg
 
-This is an image conversion tool built on top of libheif (see https://github.com/NeverMendel/heif-convert) to convert HEIC/HEIF files to JPG.
+This is an image conversion tool built on top of [libheif](https://github.com/NeverMendel/heif-convert) to convert HEIC/HEIF files to JPG.
+
+**NOTE**:
+- This repository is being archived.
+- The tool is available as a part of the Unified [CompressMedia](https://github.com/nitinkamra1992/CompressMedia) tool.
 
 ## Compatibility
 The tool has been written for Ubuntu and tested on Python v3.5 and above but may be compatible with other versions of python too.
